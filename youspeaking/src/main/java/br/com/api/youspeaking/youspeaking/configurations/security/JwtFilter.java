@@ -34,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter  {
     protected boolean shouldNotFilter(HttpServletRequest request)
       throws ServletException {
         String path = request.getRequestURI();
-        boolean isShouldNotFilter = path.contains("/actuator");
+        boolean isShouldNotFilter = path.contains("/actuator") || path.contains("/h2-console"); 
         return isShouldNotFilter;
     }
 

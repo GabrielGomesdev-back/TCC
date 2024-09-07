@@ -64,7 +64,7 @@ public class UtilsJwt {
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
 		//Let's set the JWT Claims
-		 String data =  ("{ \"codIdeCli\":  \""+userId+"\" }");
+		 String data =  ("{ \"login\":  \""+userId+"\" }");
 
 		JwtBuilder builder = Jwts.builder().setId("1L")
 				.setIssuedAt(now)
