@@ -98,6 +98,14 @@
 			<version>2.2</version>
 		</dependency>
 		<!-- DATABASE CONFIGURATIONS -->
+
+		<!-- CHAT CONFIGURATIONS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!-- CHAT CONFIGURATIONS -->
+
 	</dependencies>
 
 	<build>
