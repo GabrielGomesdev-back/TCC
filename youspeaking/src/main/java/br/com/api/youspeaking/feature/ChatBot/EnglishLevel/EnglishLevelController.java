@@ -1,8 +1,8 @@
 package br.com.api.youspeaking.feature.ChatBot.EnglishLevel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +16,8 @@ public class EnglishLevelController {
         
     @Autowired private EnglishLevelService service;
 
-    @GetMapping(value = "/first-quiz")
-    @SendTo("/question/quiz")
+    @MessageMapping(value = "/first-quiz")
+    @SendTo("/question")
     public ObjectNode getQuestionsFirstQuiz() throws APIError{
         return service.getQuestionsFirstQuiz();
     }

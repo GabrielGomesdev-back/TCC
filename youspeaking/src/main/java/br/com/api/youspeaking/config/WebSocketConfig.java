@@ -19,5 +19,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("api/v1/FT003/chat");
+		registry.addEndpoint("api/v1/FT003/chat").withSockJS();
 	}
 }
