@@ -23,7 +23,7 @@ public class TranslationService {
     @Value("${you-speaking.url.api-key}")
     private String apiKeyString;
 
-    public ObjectNode translateText(String text, String target) throws APIError {
+    public ObjectNode   translateText(String text, String target) throws APIError {
         TranslatorClient translateClient = Feign.builder().encoder(new SpringFormEncoder()).decoder(new JacksonDecoder()).target(TranslatorClient.class, urlStringTranslator);
         ObjectNode node = translateClient.translatePrhase(text, this.langDetecString(text) + "|" + target);
         return node;
