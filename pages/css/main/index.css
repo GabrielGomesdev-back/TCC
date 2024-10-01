@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: blueviolet;
+    justify-content: center;
+}
+
+.logo {
+    cursor: pointer;
+    margin-left: 10px;
+    border-bottom-left-radius: 5px;
+    padding: 10px;
+    max-height: 130px;
+    max-width: 130px;
+}
+

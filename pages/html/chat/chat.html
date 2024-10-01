@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="../../css/chat/chat.css">
+    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css"></link>
+    <script src="../../../assets/libraries/stomp/stomp.js"></script>
+    <script src="../../../assets/libraries/stomp/stomp.min.js"></script>
+    <script src="../../js/chat/chat.js"></script>
+</head>
+<body onload="javascript:connect()">
+    <div class="chat-interface">
+        <div class="chat-header"><img src="../../../archives/you-speaking-logo.svg" class="logo"></div>
+        <div class="chat-box" id="chatBox"></div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
+    <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
+</body>
+</html>
