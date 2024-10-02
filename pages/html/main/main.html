@@ -1,20 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Bot</title>
-  <link   rel="stylesheet" href="../../assets/libraries/bootstrap/css/bootstrap.min.css"></link>
-  <link   rel="stylesheet" href="../../assets/libraries/bootstrap/css/bootstrap.css"></link>
-  <link   rel="stylesheet" href="../../assets/libraries/footable/footable.core.custom.css"></link>
-  <link   rel="stylesheet" href="../../css/main.css"></link>
-  <link   rel="stylesheet" href="../../css/create-account/create-account.css"></link>
+  <link rel="stylesheet" href="../../assets/libraries/bootstrap/css/bootstrap.min.css">
+  </link>
+  <link rel="stylesheet" href="../../assets/libraries/bootstrap/css/bootstrap.css">
+  </link>
+  <link rel="stylesheet" href="../../assets/libraries/footable/footable.core.custom.css">
+  </link>
+  <link rel="stylesheet" href="../../css/main.css">
+  </link>
   <script src="../../js/create-account/create-account.js"></script>
 </head>
-<body>
 
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="#"><img src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 135443.png"
+            alt="Logo"></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#steps">Serviços</a></li>
+          <li><a href="#about-us">Sobre</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="../login/login.html">Logar</a></li>
+          <li><a href="../create-account/create-account.html">Cadastrar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="home-section">
+    <div class="container flex-container">
+      <div class="text-content">
+        <h1>Bem-vindo ao YouSpeaking</h1>
+        <p>Nosso sistema de aprendizado oferece soluções rápidas e eficientes para todos os seus projetos. Com uma
+          interface simples e intuitiva, você pode praticar novos idiomas com apenas alguns cliques!</p>
+      </div>
+      <div class="image-content">
+        <img src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 134753.png"
+          alt="Ilustração de tradução">
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Desenvolvimento em 5 Etapas -->
+  <section id="steps" class="steps-section">
+    <div class="container">
+      <h2>Nosso Processo de Desenvolvimento</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fas fa-check"></i>
+          <img class="img-step" src="assets/illustration.png" alt="Ilustração de tradução">
+          <h3>IA</h3>
+          <p>Converse e aprenda com nossa IA inteligente que corrige e orienta seu progresso em tempo real!</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-cogs"></i>
+          <img class="img-step" src="assets/illustration.png" alt="Ilustração de tradução">
+          <h3>Idiomas</h3>
+          <p>Explore um mundo de idiomas e personalize sua jornada de aprendizado!</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-check"></i>
+          <img class="img-step" src="assets/illustration.png" alt="Ilustração de tradução">
+          <h3>IA</h3>
+          <p>Converse e aprenda com nossa IA inteligente que corrige e orienta seu progresso em tempo real!</p>
+        </div>
+        <div class="step">
+          <i class="fas fa-rocket"></i>
+          <img class="img-step" src="assets/illustration.png" alt="Ilustração de tradução">
+          <h3>Metodologia</h3>
+          <p>Experimente uma abordagem inovadora que combina teoria e prática para resultados rápidos e eficazes.</p>
+        </div>
+      </div>
+  </section>
+
+  <section id="about-us" class="about-us-section">
+    <div class="container flex-container">
+      <div class="text-content">
+        <h2>Sobre Nós</h2>
+        <p>
+          Transforme o aprendizado de idiomas com inteligência artificial personalizada. No YouSpeaking, sua jornada é única, fluída e sem fronteiras.
+        </p>
+        <p>
+          Mais do que um app, uma experiência de aprendizado inteligente e conextada, onde sua voz ganha o mundo.
+        </p>
+      </div>
+      <div class="video-content">
+        <div class="video-wrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" title="YouTube video player"
+            frameborder="0" allow="accelerometer; autoplay; 
+          clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Contato -->
+  <section id="contact" class="contact-section">
+    <div class="contact d-flex justify-content-between align-items-start">
+
+      <!-- Informações de Contato -->
+      <div class="contact-info">
+        <h2>Fale Conosco</h2>
+        <p class="section-description">
+          Precisa de ajuda ou deseja mais informações? Entre em contato conosco, estamos prontos para atender suas
+          necessidades!
+        </p>
+
+        <!-- Informações de Contato -->
+        <div class="contact-details">
+          <p><i class="fas fa-envelope"></i> contato@youspeaking.com</p>
+          <p><i class="fas fa-phone-alt"></i> +55 11 1234-5678</p>
+        </div>
+      </div>
+
+      <!-- Formulário de Contato -->
+      <div class="contact-form">
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" class="form-control" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Mensagem</label>
+            <textarea id="message" class="form-control" rows="5" placeholder="Sua mensagem" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-social">
+        <a href="https://www.twitter.com" target="_blank"><img
+            src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 201809.png" alt="Facebook"></a>
+        <a href="https://www.whatsapp.com" target="_blank"><img
+            src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 201407.png" alt="Instagram"></a>
+        <a href="https://www.linkedin.com" target="_blank"><img
+            src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 201213.png" alt="LinkedIn"></a>
+      </div>
+      <div class="footer-logo"></div>
+      <img src="C:\Users\rafae\OneDrive\Imagens\Screenshots\Captura de tela 2024-10-01 194310.png" alt="Logo Footer">
+    </div>
+    </div>
+  </footer>
 </body>
+
 <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
 <script src="../../../assets/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../../assets/libraries/footable/footable.all.custom.min.js"></script>
+
 </html>
