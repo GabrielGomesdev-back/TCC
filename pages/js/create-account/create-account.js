@@ -1,3 +1,5 @@
+const apiClient = new ApiClient(urlDominioBackend);
+
 function assessPasswordStrength(password) {
     const minLength = 8;
     const minLowercase = 1;
@@ -71,8 +73,14 @@ function updateStrengthIndicator(password) {
     document.getElementById("password-strength").style.color = color;
 }
 
+async function verifyLogin(login){
+    let json = await apiClient.get("api/v1/FT003/auth/verify-login?login="+login);
+    if(json.status != "success"){
+        alert("Try another login, this login is already in use")
+    }
+}
 
-function verificarCriacao(){
+async function verificarCriacao(){
 
     if($("#email").val() == ""){
         alert("You need to write the email to confirm");
@@ -90,14 +98,22 @@ function verificarCriacao(){
         return false;
     }
 
-    let mapCriacao = {
-        firstName:       $("#firstName").val(),
-        lastName:        $("#lastName").val(),
-        email:           $("#email").val(),
-        confirmEmail:    $("#confirmEmail").val(),
-        password:        $("#password").val(),
-        confirmPassword: $("#confirmPassword").val()
+    let mapUser = {
+        name:     $("#firstName").val() + " " + $("#lastName").val(),
+        login:    $("#login").val(),
+        email:    $("#email").val(),
+        password: $("#password").val(),
+        language: $("#languages").val()
     };
+    
+    sessionStorage.setItem("login", $("#login").val());
+    let data = await apiClient.post("api/v1/FT003/auth/user-register", mapUser)
 
-    console.table(mapCriacao);
+    if(data.status == "success"){
+        alert(data.message);
+        window.location.replace(urlDominioFrontend + "pages/html/chat/chat.html");
+
+    } else {
+        alert("You didn't can create your account, review the informations inserted");
+    }
 }
