@@ -18,9 +18,4 @@ public class ClassesController {
     public ObjectNode greetings(@RequestParam String login) throws Exception {
         return service.greetings(login);
     }
-
-    @GetMapping("/generateJokes")
-    public String generateJokes(@RequestParam String login) throws Exception {
-        return service.generateJokes(login);
-    }
 }
