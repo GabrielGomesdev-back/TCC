@@ -15,7 +15,7 @@ html, body {
 .chat-header {
     background: #6a0dad;
     color: white;
-    padding: 15px;
+    padding: 5px;
     text-align: center;
     font-size: 18px;
     border-bottom: 1px solid #ddd;
@@ -87,6 +87,6 @@ html, body {
 }
 
 .logo {
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 80px;
+    max-width: 80px;
 }
