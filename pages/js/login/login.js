@@ -11,7 +11,7 @@ async function loginUser(){
 
     if(data.status == "success"){
         alert(data.message);
-        window.location.replace(urlDominioFrontend + "TCC/pages/html/chat/chat.html");
+        window.location.replace(urlDominioFrontend + "/pages/html/chat/chat.html");
     } else {
         alert("We didn't can found a account with the inserted informations, please review them");
     }

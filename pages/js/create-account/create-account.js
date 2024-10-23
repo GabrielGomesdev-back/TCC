@@ -111,7 +111,7 @@ async function verificarCriacao(){
 
     if(data.status == "success"){
         alert(data.message);
-        window.location.replace(urlDominioFrontend + "TCC/pages/html/chat/chat.html");
+        window.location.replace(urlDominioFrontend + "/pages/html/chat/chat.html");
 
     } else {
         alert("You didn't can create your account, review the informations inserted");
