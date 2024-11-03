@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial - Plataforma de Aprendizado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/home/home.css"></link>
+    <script src="../../js/home/home.js"></script>
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <header>
+        <div class="navbar">
+          <div class="logo">
+            <a href="#"><img src="../../img/You Speakingl.png"
+                alt="Logo"></a>
+          </div>
+          
+          <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+          <div class="profile-info">
+            <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic">
+            <span class="profile-name">Nome do Aluno</span>
+          </div>
+        </div>
+        
+        <nav class="nav-links" id="nav-links">
+          <a href="#"><img
+            src="../../img/12.png" alt="Notificações">  Notificações</a>
+          <a href="#"><img
+            src="../../img/13.png" alt="Chat">  Chat</a>          
+          <a href="#" id="language"><img
+            src="../../img/15.png" alt="Idioma">    Idioma</a>
+          <a href="#"><img
+            src="../../img/11.png" alt="Ajuda"> Ajuda</a>
+          <a href="#" id="logout"><img
+            src="../../img/14.png" alt="Logout">    Logout</a>
+        </nav>
+      </header>      
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        <section class="sidebar-left">
+                <div class="profile-container">
+                    <div class="profile-info-content">
+                        <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic-content">
+                        <div class="user-details">
+                            <h2 class="user-name">Nome do Aluno</h2>
+                            <p class="user-email">email@exemplo.com</p>
+                        </div>
+                    </div>
+                    <div class="calendar-container">
+                      <div class="calendar-header">
+                          <h2>Calendário de Login</h2>
+                      </div>
+                      <div class="calendar-days">
+                          <!-- Dias do mês serão gerados dinamicamente pelo JavaScript -->
+                      </div>
+                  </div>
+                  
+                </div>
+            
+        </section>
+        
+        <section class="center-content">
+          <div class="main-content">
+            <!-- Seção Central de Posts -->
+                <div class="post">
+                    <div class="post-header">
+                        <div class="post-user-info">
+                            <span class="post-date">2 horas atrás</span>
+                        </div>
+                    </div>
+                    <p class="post-text">Texto do post aqui. Essa seção pode conter o que o usuário desejar compartilhar.</p>
+                    <img src="post-imagem.jpg" alt="Imagem do Post" class="post-image">
+                </div>
+                
+                <!-- Adicione mais posts conforme necessário -->
+        </div>
+        </section>
+
+        <section class="sidebar-right">
+              <h3>Lista de Usuários</h3>
+              <div class="user-list">
+                  <!-- Exemplo de Usuário -->
+                  <div class="user">
+                      <div class="user-info">
+                          <span class="user-name">Nome do Usuário</span>
+                          <span class="user-email">usuario@email.com</span>
+                      </div>
+                      <div class="user-info">
+                        <span class="user-name">Nome do Usuário</span>
+                        <span class="user-email">usuario@email.com</span>
+                      </div>
+                      <div class="user-info">
+                        <span class="user-name">Nome do Usuário</span>
+                        <span class="user-email">usuario@email.com</span>
+                      </div>
+                      <div class="user-info">
+                        <span class="user-name">Nome do Usuário</span>
+                        <span class="user-email">usuario@email.com</span>
+                      </div>
+                      <div class="user-info">
+                        <span class="user-name">Nome do Usuário</span>
+                        <span class="user-email">usuario@email.com</span>
+                      </div>
+                  </div>
+                  <!-- Adicione mais usuários conforme necessário -->
+              </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Plataforma de Idiomas. Todos os direitos reservados.
+    </footer>
+</body>
+</html>

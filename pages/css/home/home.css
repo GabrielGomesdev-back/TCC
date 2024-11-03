@@ -1,0 +1,319 @@
+/* Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #C595FF;
+    padding: 10px 20px; /* Ajuste o padding lateral para evitar quebras */
+    position: relative;
+    z-index: 10;
+}
+
+header img {
+    width: 30%;
+}
+
+.navbar {
+    display: flex;/* Distribui os itens no espaço disponível */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #301e66;
+    flex-wrap: nowrap;
+}
+
+/* Menu Hamburguer */
+.menu-icon {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-right: 10px; /* Espaço entre o ícone do menu e o logo */
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    background-color: #301e66;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.menu-icon.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menu Lateral */
+.nav-links {
+    position: fixed;
+    top: 60px; 
+    left: -250px;
+    height: calc(100vh - 100px);
+    width: 250px;
+    background-color: #C595FF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 30px;
+    transition: left 0.4s ease;
+    overflow-y: auto;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    color: #301e66;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.nav-links a img {
+    width: 20px;
+    height: 20px;
+}   
+
+.nav-links.active {
+    left: 0;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a foto e o nome */
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    color: #301e66;
+}
+
+/* Layout do Conteúdo Principal */
+.main-content {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.sidebar-left,
+.sidebar-right {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-info-content {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic-content {
+    width: 80px; /* Ajuste o tamanho conforme necessário */
+    height: 80px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%;
+    margin-right: 15px; /* Espaçamento entre a foto e o texto */
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.user-email {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 0 0; /* Espaçamento acima */
+}
+
+
+.calendar-container {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.calendar-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.calendar-day.logged {
+    background-color: #C595FF;
+    color: white;
+}
+
+.center-content {
+    flex: 2; /* Parte central ocupa mais espaço */
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Estilos da Seção de Posts */
+
+.post {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-user-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.post-date {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.post-text {
+    margin: 10px 0;
+    color: #555;
+}
+
+.post-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Estilos da Seção Direita */
+
+h3 {
+    color: #301e66;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Opcional: adiciona uma linha separadora */
+}
+
+.user-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.user-email {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+footer a {
+    color: #301e66;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+footer a:hover {
+    color: #301e66;
+}

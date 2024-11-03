@@ -169,6 +169,14 @@ header nav ul li a {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 18%;
+  text-align: center;
+}
+
+.step img {
+  width: 100%; /* Ajusta a largura da imagem para o container */
+  height: auto; /* Mantém a proporção da imagem */
+  margin-bottom: 15px;
+  border-radius: 8px;
 }
 
 .step h3 {
