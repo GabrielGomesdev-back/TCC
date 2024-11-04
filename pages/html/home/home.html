@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/home/home.css"></link>
     <script src="../../js/home/home.js"></script>
+    <script src="../../../assets/components/utils.js"></script>
 </head>
 <body>
     <!-- Menu de Navegação -->
@@ -22,23 +23,18 @@
             <span></span>
             <span></span>
           </div>
-          
-          <div class="profile-info">
-            <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic">
-            <span class="profile-name">Nome do Aluno</span>
-          </div>
         </div>
         
         <nav class="nav-links" id="nav-links">
-          <a href="#"><img
-            src="../../img/12.png" alt="Notificações">  Notificações</a>
-          <a href="#"><img
-            src="../../img/13.png" alt="Chat">  Chat</a>          
-          <a href="#" id="language"><img
-            src="../../img/15.png" alt="Idioma">    Idioma</a>
-          <a href="#"><img
-            src="../../img/11.png" alt="Ajuda"> Ajuda</a>
-          <a href="#" id="logout"><img
+          <!-- <a href="#"><img
+            src="../../img/12.png" alt="Notificações">  Notificações</a> -->
+          <a href= window.urlDominioFrontend + "/pages/html/chat/chat.html"><img
+            src="../../img/13.png" alt="Chat"> You-bot </a>          
+          <a href= window.urlDominioFrontend + "/pages/html/chatFriend/chatFriend.html" id="language"><img
+            src="../../img/15.png" alt="Idioma"> Friendly Chat </a>
+          <!-- <a href="#"><img
+            src="../../img/11.png" alt="Ajuda"> Ajuda</a> -->
+          <a href="#" onclick="logout()" id="logout"><img
             src="../../img/14.png" alt="Logout">    Logout</a>
         </nav>
       </header>      
@@ -50,8 +46,8 @@
                     <div class="profile-info-content">
                         <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic-content">
                         <div class="user-details">
-                            <h2 class="user-name">Nome do Aluno</h2>
-                            <p class="user-email">email@exemplo.com</p>
+                            <h2 id="nomUser" class="user-name">Nome do Aluno</h2>
+                            <p id="emailUser" class="user-email">email@exemplo.com</p>
                         </div>
                     </div>
                     <div class="calendar-container">
