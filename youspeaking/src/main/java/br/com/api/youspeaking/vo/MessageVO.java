@@ -1,4 +1,4 @@
-package br.com.api.youspeaking.feature.ChatBot.EnglishLevel.vo;
+package br.com.api.youspeaking.vo;
 
 import lombok.Getter;
 import lombok.Setter;

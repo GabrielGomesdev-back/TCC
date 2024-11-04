@@ -10,7 +10,5 @@ public interface JokesClient {
     
     @RequestLine("GET joke/Any?lang={lang}&type=single")
     @Headers("Content-type: application/json")
-    public ObjectNode generateJoke(
-        @Param("lang") String lang
-        );
+    public ObjectNode generateJoke( @Param("lang") String lang );
 }

@@ -7,38 +7,31 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.detectlanguage.errors.APIError;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.com.api.youspeaking.data.entity.LogMessage;
 import br.com.api.youspeaking.data.repository.LogMessageRepository;
-import br.com.api.youspeaking.feature.ChatBot.EnglishLevel.vo.ChatRequestVO;
-import br.com.api.youspeaking.feature.ChatBot.EnglishLevel.vo.MessageVO;
-import br.com.api.youspeaking.feature.Translation.TranslationService;
-import br.com.api.youspeaking.thirdparties.JokesClient;
-import feign.Feign;
-import feign.form.spring.SpringFormEncoder;
-import feign.jackson.JacksonDecoder;
+import br.com.api.youspeaking.feature.Thirdparties.OpenAI.OpenApiService;
+import br.com.api.youspeaking.vo.ChatRequestVO;
+import br.com.api.youspeaking.vo.MessageVO;
 
 @Service
 public class EnglishLevelService {
 
-    @Value("${you-speaking.url.jokes}") private String urlStringJokes;
     @Autowired LogMessageRepository logMessageRepository;
-    @Autowired TranslationService translationService;
+    @Autowired OpenApiService openAiService;
 
-    public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws APIError{
-        ObjectNode response = getResponse(json);
-        ChatRequestVO vo = formJsonRequest(json);
+    public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws APIError, JsonProcessingException{
+        ObjectNode response = formJsonRequest(json);
         recordLogMessage(json, response);
         return response;
     }
 
-    protected ChatRequestVO formJsonRequest(ObjectNode json){
+    protected ObjectNode formJsonRequest(ObjectNode json) throws JsonProcessingException{
         ChatRequestVO chatRequest = new ChatRequestVO();
         List<MessageVO> listaMensagens = new ArrayList();
         ArrayList<LogMessage> messages = logMessageRepository.findAllByLoginOrderByDateMessageAsc(json.get("login").toString());
@@ -52,16 +45,7 @@ public class EnglishLevelService {
         listaMensagens.add(vo);
         chatRequest.setModel("gpt-3.5-turbo");
         chatRequest.setMessages(listaMensagens);
-        /* Request HERE and Logic for response*/
-        return chatRequest;
-    }
-
-    protected ObjectNode getResponse (ObjectNode json) throws APIError{
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode response = mapper.createObjectNode();
-        response.put("text", callJokesApi(json.get("language").asText()));
-        response.put("time", obterDataAtual());
-        response.put("from", "SERVER");
+        ObjectNode response = openAiService.callOpenAI(chatRequest);
         return response;
     }
 
@@ -69,16 +53,10 @@ public class EnglishLevelService {
         LogMessage log = new LogMessage(
             jsonUsuario.get("login").toString(), 
             jsonUsuario.get("message").toString(),
-            jsonChat.get("message").toString(),
+            jsonChat.get("message").get("choices").get(0).get("message").get("content").asText(),
             new Date()
         );
         logMessageRepository.saveAndFlush(log);
-    }
-
-    private String callJokesApi(String language) throws APIError{
-        JokesClient jokesClient = Feign.builder().encoder(new SpringFormEncoder()).decoder(new JacksonDecoder()).target(JokesClient.class, urlStringJokes);
-        ObjectNode node = jokesClient.generateJoke("en");
-        return "en".equals(language) ? node.get("joke").asText() : translationService.translateText(node.get("joke").asText(), language).get("responseData").get("translatedText").asText() ;
     }
 
     private String obterDataAtual(){
