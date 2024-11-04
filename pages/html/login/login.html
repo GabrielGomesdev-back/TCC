@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="../../assets/libraries/footable/footable.core.custom.css"></link>
     <link rel="stylesheet" href="../../css/main.css"></link>
     <link rel="stylesheet" href="../../css/login/login.css"></link>
-    <script type="module"  src="../../js/login/login.js"></script>
+    <script src="../../../assets/components/utils.js"></script>
+    <script src="../../../assets/components/apiClient.js"></script>
+    <script src="../../js/login/login.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Login</h2>
         <form action="#">
-          <input type="text" placeholder="E-mail" required>
-          <input type="password" placeholder="Password" required>
+          <input id="login" type="text" placeholder="Login" required>
+          <input id="password" type="password" placeholder="Password" required>
           <div class="link">
-            <a href="#">Forgot my account</a>
+            <!-- <a href="#">Forgot my account</a> -->
           </div>
-          <input type="submit" value="Login">
+          <input type="button" onclick="loginUser()" value="Login">
         </form>
         <div class="links">
           <a href="../create-account/create-account.html">Create an account</a>
@@ -28,6 +30,7 @@
       </div>
 </body>
 <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
+<script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
 <script src="../../../assets/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../../assets/libraries/footable/footable.all.custom.min.js"></script>
 </html>
