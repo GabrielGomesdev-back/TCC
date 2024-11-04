@@ -23,7 +23,7 @@ import br.com.api.youspeaking.vo.MessageVO;
 public class EnglishLevelService {
 
     @Autowired LogMessageRepository logMessageRepository;
-    @Autowired OpenApiService openAiService;
+    @Autowired OpenApiService openApiService;
 
     public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws APIError, JsonProcessingException{
         ObjectNode response = formJsonRequest(json);
@@ -45,7 +45,7 @@ public class EnglishLevelService {
         listaMensagens.add(vo);
         chatRequest.setModel("gpt-3.5-turbo");
         chatRequest.setMessages(listaMensagens);
-        ObjectNode response = openAiService.callOpenAI(chatRequest);
+        ObjectNode response = openApiService.callOpenAI(chatRequest);
         return response;
     }
 

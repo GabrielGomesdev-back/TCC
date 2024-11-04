@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import br.com.api.youspeaking.vo.ChatRequestVO;
 import feign.Feign;
 
+@Service
 public class OpenApiService {
     
     @Value("${you-speaking.url.open.api}") private String url;
