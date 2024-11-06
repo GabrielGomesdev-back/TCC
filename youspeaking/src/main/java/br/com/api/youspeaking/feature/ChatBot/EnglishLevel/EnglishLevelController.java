@@ -5,7 +5,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import com.detectlanguage.errors.APIError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,7 +17,7 @@ public class EnglishLevelController {
 
     @MessageMapping("/send")
     @SendTo("/topic/message")
-    public ObjectNode getQuestionsFirstQuiz(String jsonMessage) throws APIError, JsonProcessingException{
+    public ObjectNode getQuestionsFirstQuiz(String jsonMessage) throws JsonProcessingException{
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode message = (ObjectNode) mapper.readTree(jsonMessage);
         return service.getQuestionsFirstQuiz(message);

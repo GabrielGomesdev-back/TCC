@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.detectlanguage.errors.APIError;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.com.api.youspeaking.data.repository.UserRepository;
@@ -21,6 +21,7 @@ import jakarta.validation.Valid;
 @RequestMapping("api/v1/FT003/auth")
 public class AuthController {
     
+
     @Autowired AuthService service; 
     @Autowired UserRepository userRepository;
     @Autowired TranslationService translationService;
@@ -34,7 +35,7 @@ public class AuthController {
     }
     
     @PostMapping("/user-login")
-    public ObjectNode userLogin(@RequestBody @Valid ObjectNode json) throws APIError{
+    public ObjectNode userLogin(@RequestBody @Valid ObjectNode json) throws JsonProcessingException{
         String language = service.authLogin(json);
         if(language != null) {
         return Utils.loginSuccess(!"EN".equals(language) ? translationService.translateText(messageLogin, language).get("responseData").get("translatedText").asText() : messageLogin);

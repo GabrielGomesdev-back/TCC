@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.detectlanguage.errors.APIError;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -25,7 +24,7 @@ public class EnglishLevelService {
     @Autowired LogMessageRepository logMessageRepository;
     @Autowired OpenApiService openApiService;
 
-    public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws APIError, JsonProcessingException{
+    public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws JsonProcessingException{
         ObjectNode response = formJsonRequest(json);
         recordLogMessage(json, response);
         return response;
