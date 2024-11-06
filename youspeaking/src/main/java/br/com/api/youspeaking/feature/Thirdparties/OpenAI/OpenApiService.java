@@ -28,7 +28,7 @@ public class OpenApiService {
         headers.put("Content-Type", "application/json");
 
         OpenApiClient openApiClient = Feign.builder().target(OpenApiClient.class, url);
-        String responseApi = openApiClient.callOpenApi(headers, mapper.writeValueAsString(requestInfo));
+        String responseApi = openApiClient.callOpenApi(headers, mapper.writeValueAsString(requestInfo));        
         return (ObjectNode) mapper.readTree(responseApi);
     }
 

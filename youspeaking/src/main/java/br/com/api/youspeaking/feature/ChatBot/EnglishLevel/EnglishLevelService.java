@@ -43,7 +43,7 @@ public class EnglishLevelService {
         }
         MessageVO vo = new MessageVO(json.get("message").toString(), "user");
         listaMensagens.add(vo);
-        chatRequest.setModel("gpt-3.5-turbo");
+        chatRequest.setModel("gpt-4o-mini");
         chatRequest.setMessages(listaMensagens);
         ObjectNode response = openApiService.callOpenAI(chatRequest);
         return response;
