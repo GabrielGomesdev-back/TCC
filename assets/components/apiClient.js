@@ -3,7 +3,6 @@ class ApiClient {
         this.baseURL = baseURL;
     }
 
-    // Método GET
     async get(endpoint) {
         try {
             const response = await fetch(`${this.baseURL}${endpoint}`);
@@ -13,11 +12,10 @@ class ApiClient {
             return await response.json();
         } catch (error) {
             console.error('Error fetching data:', error);
-            throw error; // Re-throw the error for further handling
+            throw error;
         }
     }
 
-    // Método POST
     async post(endpoint, data) {
         try {
             const response = await fetch(`${this.baseURL}${endpoint}`, {
@@ -33,7 +31,7 @@ class ApiClient {
             return await response.json();
         } catch (error) {
             console.error('Error posting data:', error);
-            throw error; // Re-throw the error for further handling
+            throw error;
         }
     }
 }
