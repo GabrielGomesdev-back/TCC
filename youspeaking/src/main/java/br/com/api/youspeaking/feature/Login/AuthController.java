@@ -1,6 +1,7 @@
 package br.com.api.youspeaking.feature.Login;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,6 @@ import br.com.api.youspeaking.data.repository.UserRepository;
 import br.com.api.youspeaking.feature.Translation.TranslationService;
 import br.com.api.youspeaking.utils.Utils;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
@@ -37,7 +37,7 @@ public class AuthController {
     public ObjectNode userLogin(@RequestBody @Valid ObjectNode json) throws APIError{
         String language = service.authLogin(json);
         if(language != null) {
-        return Utils.loginSuccess(!"en".equals(language) ? translationService.translateText(messageLogin, language).get("responseData").get("translatedText").asText() : messageLogin);
+        return Utils.loginSuccess(!"EN".equals(language) ? translationService.translateText(messageLogin, language).get("responseData").get("translatedText").asText() : messageLogin);
         }  else { return Utils.loginError(); }
     }
 
@@ -46,7 +46,7 @@ public class AuthController {
         try {
             if(userRepository.findByLogin(json.get("login").asText()) != null ) return Utils.createAccountError();
             service.createUser(json);
-            return Utils.createAccountSuccess(!"en".equals(json.get("language").asText()) ? translationService.translateText(messageCreation, json.get("language").asText()).get("responseData").get("translatedText").asText() : messageCreation);
+            return Utils.createAccountSuccess(!"EN".equals(json.get("language").asText()) ? translationService.translateText(messageCreation, json.get("language").asText()).get("responseData").get("translatedText").asText() : messageCreation);
         } catch(Exception e){ return Utils.createAccountError(); }
     }
 

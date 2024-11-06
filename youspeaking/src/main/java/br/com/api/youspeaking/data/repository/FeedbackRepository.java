@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.api.youspeaking.data.entity.Feedback;
 
+
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, String>{
     
+    Feedback findByLogin(String login);
+
 }

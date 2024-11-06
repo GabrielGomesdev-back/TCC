@@ -12,8 +12,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import br.com.api.youspeaking.data.entity.Feedback;
 import br.com.api.youspeaking.data.entity.QuizResult;
+import br.com.api.youspeaking.data.entity.User;
+import br.com.api.youspeaking.data.repository.FeedbackRepository;
 import br.com.api.youspeaking.data.repository.QuizResultRepository;
+import br.com.api.youspeaking.data.repository.UserRepository;
 import br.com.api.youspeaking.feature.Thirdparties.OpenAI.OpenApiService;
 import br.com.api.youspeaking.utils.Utils;
 import br.com.api.youspeaking.vo.ChatRequestVO;
@@ -24,6 +28,8 @@ public class QuizService {
 
     @Autowired OpenApiService openAIservice;
     @Autowired QuizResultRepository quizResultRepository;
+    @Autowired FeedbackRepository feedbackRepository;
+    @Autowired UserRepository userRepository;
 
     public ObjectNode generateQuestions(String login, String language) throws Exception {
         ObjectNode response     = Utils.genericJsonSuccess();
@@ -71,10 +77,48 @@ public class QuizService {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response     = Utils.genericJsonSuccess();
 
-        ObjectNode nodeResponse = (ObjectNode) mapper.readTree(json);
+        ObjectNode objectJson = (ObjectNode) mapper.readTree(json);
+        generateFeedback(objectJson);
         
-        response.put("data", mapper.writeValueAsString(nodeResponse));
+        response.put("data", "Operação realizada com sucesso !");
         return response;
+    }
+
+    protected void generateFeedback(ObjectNode json) throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+        ChatRequestVO chatRequest = new ChatRequestVO();
+        List<MessageVO> listaMensagens = new ArrayList();
+
+        QuizResult quiz = quizResultRepository.findByLoginUser(json.get("user").asText());
+        User user = userRepository.findByLogin(json.get("user").asText());
+
+        String prompt  = "O Json contém 5 perguntas para medir o conhecimento de uma pessoa no idioma ${idiomaAprendizado} : ${jsonPerguntas}";
+        String prompt2 = " um usuário acertou as perguntas correspondentes aos indices: ${perguntasCertas} | com base nos acertos gere um JSON em camelCase e retorne somente o json com os atributos de nivel indicando o nível de conhecimento do usuário e outro de feedback que vai explicar sobre o nível de idioma e dar algumas dicas de como melhorar a aprendizagem, retornar o campo feedback em html dentro de uma string ";
+        
+        prompt = prompt.replace("${idiomaAprendizado}", user.getLanguage());
+        prompt = prompt.replace("${jsonPerguntas}", quiz.getQuestionsGenerated());
+
+        prompt2 = prompt2.replace("${perguntasCertas}", json.get("questions").asText());
+
+        MessageVO vo = new MessageVO(prompt + prompt2, "user");
+        listaMensagens.add(vo);
+        chatRequest.setMessages(listaMensagens);
+        chatRequest.setModel("gpt-4o-mini");
+        ObjectNode responseChat   = openAIservice.callOpenAI(chatRequest);
+
+        String responseChatString = responseChat.get("choices").get(0).get("message").get("content").asText();
+        JsonNode jsonNode = mapper.readTree(responseChatString.replaceAll("```|´´´", "").replace("json", ""));    
+
+        saveFeedback(json.get("user").asText(), jsonNode);
+    }
+
+    protected void saveFeedback(String login, JsonNode jsonNode){
+        Feedback feedback = new Feedback();
+        feedback.setFeedbackDate(new Date());
+        feedback.setFeedbackUser(jsonNode.get("feedback").asText());
+        feedback.setLanguageLevel(jsonNode.get("nivel").asText());
+        feedback.setLogin(login);
+        feedbackRepository.save(feedback);
     }
 
 }
