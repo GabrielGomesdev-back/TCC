@@ -13,8 +13,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.com.api.youspeaking.data.entity.LogMessage;
+import br.com.api.youspeaking.data.entity.User;
 import br.com.api.youspeaking.data.repository.LogMessageRepository;
+import br.com.api.youspeaking.data.repository.UserRepository;
 import br.com.api.youspeaking.feature.Thirdparties.OpenAI.OpenApiService;
+import br.com.api.youspeaking.utils.Utils;
 import br.com.api.youspeaking.vo.ChatRequestVO;
 import br.com.api.youspeaking.vo.MessageVO;
 
@@ -23,36 +26,42 @@ public class EnglishLevelService {
 
     @Autowired LogMessageRepository logMessageRepository;
     @Autowired OpenApiService openApiService;
+    @Autowired UserRepository repository;
 
     public ObjectNode getQuestionsFirstQuiz(ObjectNode json) throws JsonProcessingException{
-        ObjectNode response = formJsonRequest(json);
+        ObjectNode response     = Utils.genericJsonSuccess();
+        response.put("data", formJsonRequest(json));
         recordLogMessage(json, response);
         return response;
     }
 
-    protected ObjectNode formJsonRequest(ObjectNode json) throws JsonProcessingException{
+    protected String formJsonRequest(ObjectNode json) throws JsonProcessingException{
         ChatRequestVO chatRequest = new ChatRequestVO();
         List<MessageVO> listaMensagens = new ArrayList();
-        ArrayList<LogMessage> messages = logMessageRepository.findAllByLoginOrderByDateMessageAsc(json.get("login").toString());
+        User user = repository.findByLogin(json.get("login").asText());
+        ArrayList<LogMessage> messages = logMessageRepository.findAllByLoginOrderByDateMessageAsc(json.get("login").asText());
         for(LogMessage message : messages){
             MessageVO voUser = new MessageVO(message.getMessage(), "user");
             listaMensagens.add(voUser);
             MessageVO voAssistaint = new MessageVO(message.getMessageResponse(), "assistant");
             listaMensagens.add(voAssistaint);
         }
-        MessageVO vo = new MessageVO(json.get("message").toString(), "user");
+        String prompt = "Responda como professor de ${idioma} dando aulas para um aluno de nível ${nivel} e gere um exercício que possa ser resolvido por conversação ou por texto de exemplo e corrija-o formate-os em HTML para serem adicionados a uma div quebre as linhas usando <br> escreva o enunciado das perguntas usando <h5> na próxima interação com o usuário, após a correção continue a conversa gerando novas perguntas:";
+        prompt = prompt.replace("${idioma}", user.getLanguage());
+        prompt = prompt.replace("${nivel}", user.getLanguageLevel());
+        MessageVO vo = new MessageVO(prompt + json.get("message").toString(), "user");
         listaMensagens.add(vo);
         chatRequest.setModel("gpt-4o-mini");
         chatRequest.setMessages(listaMensagens);
         ObjectNode response = openApiService.callOpenAI(chatRequest);
-        return response;
+        return response.get("choices").get(0).get("message").get("content").asText().replaceAll("```|´´´", "").replace("html", "");
     }
 
-    protected void recordLogMessage(ObjectNode jsonUsuario, ObjectNode jsonChat){
+    public void recordLogMessage(ObjectNode jsonUsuario, ObjectNode jsonChat){
         LogMessage log = new LogMessage(
             jsonUsuario.get("login").toString(), 
             jsonUsuario.get("message").toString(),
-            jsonChat.get("message").get("choices").get(0).get("message").get("content").asText(),
+            jsonChat.get("data").asText(),
             new Date()
         );
         logMessageRepository.saveAndFlush(log);

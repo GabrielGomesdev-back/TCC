@@ -47,7 +47,7 @@ public class AuthController {
         try {
             if(userRepository.findByLogin(json.get("login").asText()) != null ) return Utils.createAccountError();
             service.createUser(json);
-            return Utils.createAccountSuccess(!"EN".equals(json.get("language").asText()) ? translationService.translateText(messageCreation, json.get("language").asText()).get("responseData").get("translatedText").asText() : messageCreation);
+            return Utils.createAccountSuccess(!"EN".equals(json.get("language").asText()) ? translationService.translateText(messageCreation, json.get("language").asText()).get("data").asText() : messageCreation);
         } catch(Exception e){ return Utils.createAccountError(); }
     }
 

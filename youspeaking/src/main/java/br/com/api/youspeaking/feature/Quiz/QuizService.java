@@ -73,7 +73,7 @@ public class QuizService {
         quizResultRepository.save(quiz);
     }
 
-    public ObjectNode generateFeedbackQuiz(String json) throws Exception {
+    public ObjectNode generateFeedback(String json) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode response     = Utils.genericJsonSuccess();
 
@@ -92,7 +92,7 @@ public class QuizService {
         QuizResult quiz = quizResultRepository.findByLoginUser(json.get("user").asText());
         User user = userRepository.findByLogin(json.get("user").asText());
 
-        String prompt  = "O Json contém 5 perguntas para medir o conhecimento de uma pessoa no idioma ${idiomaAprendizado} : ${jsonPerguntas}";
+        String prompt  = "Responda somente um json: O Json contém 5 perguntas para medir o conhecimento de uma pessoa no idioma ${idiomaAprendizado} : ${jsonPerguntas}";
         String prompt2 = " um usuário acertou as perguntas correspondentes aos indices: ${perguntasCertas} | com base nos acertos gere um JSON em camelCase e retorne somente o json com os atributos de nivel indicando o nível de conhecimento do usuário e outro de feedback que vai explicar sobre o nível de idioma e dar algumas dicas de como melhorar a aprendizagem, retornar o campo feedback em html dentro de uma string ";
         
         prompt = prompt.replace("${idiomaAprendizado}", user.getLanguage());
@@ -110,6 +110,9 @@ public class QuizService {
         JsonNode jsonNode = mapper.readTree(responseChatString.replaceAll("```|´´´", "").replace("json", ""));    
 
         saveFeedback(json.get("user").asText(), jsonNode);
+
+        user.setLanguageLevel(jsonNode.get("nivel").asText());
+        userRepository.save(user);
     }
 
     protected void saveFeedback(String login, JsonNode jsonNode){

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,8 +25,8 @@ public class LogMessage {
     @GeneratedValue(strategy =  GenerationType.UUID)
     private String idLogMessage;
     private String login;
-    private String message;
-    private String messageResponse;
+    @Lob private String message;
+    @Lob private String messageResponse;
     private Date   dateMessage;
     
     public LogMessage(String login, String message, String messageResponse,Date dateMessage){

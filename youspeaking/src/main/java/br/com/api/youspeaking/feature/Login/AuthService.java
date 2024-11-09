@@ -32,6 +32,7 @@ public class AuthService {
             if(user.getLogin().equals(json.get("login").asText()) && user.getPassword().equals(encryptedPassword)){
                 Long classes = user.getNumClasses();
                 user.setNumClasses(classes + 1L);
+                user.setFlgLogged("S");
                 repository.save(user);
                 return user.getLanguage();
             } else {

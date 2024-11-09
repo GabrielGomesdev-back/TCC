@@ -15,7 +15,7 @@ public class ClassesController {
     @Autowired ClassesService service;
 
     @GetMapping("/greetings")
-    public ObjectNode greetings(@RequestParam String login) throws Exception {
-        return service.greetings(login);
+    public ObjectNode greetings(@RequestParam String login, @RequestParam String language) throws Exception {
+        return service.greetings(login, language);
     }
 }

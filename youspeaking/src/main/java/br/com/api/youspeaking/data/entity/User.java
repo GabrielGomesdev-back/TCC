@@ -32,6 +32,7 @@ public class User {
     private Long   numClasses;
     private Date   registerDate;
     private String flgLogged;
+    private String languageLevel;
     
     public User(String login, String email, String password, String role, String language, Long numClasses, String name){
         this.login        = login;
