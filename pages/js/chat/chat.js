@@ -2,6 +2,9 @@ const socketUrl = urlDominioWebsocket + 'chat/info';
 let stompClient;
 
 async function greetinsChat() {
+    let json = await apiClient.get("api/v1/FT006/home/user-info?login="+sessionStorage.getItem('login'));
+    $("#loginUsuario").text("Nome: " + json?.data?.name);
+
     $.ajax({
         url : urlDominioBackend + 'api/v1/FT004/classes/greetings?login='+ sessionStorage.getItem('login') + '&language=' + navigator.language,
         type: "GET",
@@ -203,4 +206,12 @@ function toggleMenu() {
 
     navLinks.classList.toggle("active");
     menuIcon.classList.toggle("active");
+}
+
+async function logout(){
+    let json = await apiClient.logout(sessionStorage.getItem('login'));
+    if(json.status == "success"){
+        sessionStorage.clear();
+        window.location.replace(urlDominioFrontend);
+    }
 }
