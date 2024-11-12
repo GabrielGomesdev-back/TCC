@@ -46,7 +46,7 @@ public class EnglishLevelService {
             MessageVO voAssistaint = new MessageVO(message.getMessageResponse(), "assistant");
             listaMensagens.add(voAssistaint);
         }
-        String prompt = "Responda como professor de ${idioma} dando aulas para um aluno de nível ${nivel} e gere um exercício que possa ser resolvido por conversação ou por texto de exemplo e corrija-o formate-os em HTML para serem adicionados a uma div quebre as linhas usando <br> escreva o enunciado das perguntas usando <h5> na próxima interação com o usuário, após a correção continue a conversa gerando novas perguntas:";
+        String prompt = "Responda como professor de ${idioma} dando aulas para um aluno de nível ${nivel} e gere um exercício que possa ser resolvido por conversação ou por texto de exemplo e corrija-o formate-os em HTML para serem adicionados a uma div quebre as linhas usando <br> escreva o enunciado das perguntas usando <h5> na próxima interação com o usuário, após a correção continue a conversa gerando novas perguntas para ensinar o idioma ${idioma}:";
         prompt = prompt.replace("${idioma}", user.getLanguage());
         prompt = prompt.replace("${nivel}", user.getLanguageLevel());
         MessageVO vo = new MessageVO(prompt + json.get("message").toString(), "user");
