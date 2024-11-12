@@ -91,7 +91,7 @@ async function verificarCriacao(){
         return false;
     }
 
-    let json = await apiClient.get("api/v1/FT003/auth/verify-login?login="+login);
+    let json = await apiClient.get("api/v1/FT003/auth/verify-login?login="+$("#login").val());
     if(json.status != "success"){
         alert("Try another login, this login is already in use")
         return false
