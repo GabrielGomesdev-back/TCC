@@ -73,13 +73,6 @@ function updateStrengthIndicator(password) {
     document.getElementById("password-strength").style.color = color;
 }
 
-async function verifyLogin(login){
-    let json = await apiClient.get("api/v1/FT003/auth/verify-login?login="+login);
-    if(json.status != "success"){
-        alert("Try another login, this login is already in use")
-    }
-}
-
 async function verificarCriacao(){
 
     if($("#email").val() == ""){
@@ -96,6 +89,12 @@ async function verificarCriacao(){
     } else if($("#password").val() != $("#confirmPassword").val()){
         alert("The first password needs to be equal than second");
         return false;
+    }
+
+    let json = await apiClient.get("api/v1/FT003/auth/verify-login?login="+login);
+    if(json.status != "success"){
+        alert("Try another login, this login is already in use")
+        return false
     }
 
     let mapUser = {

@@ -10,8 +10,9 @@ async function loginUser(){
     let data = await apiClient.post("api/v1/FT003/auth/user-login", mapUser)
 
     if(data.status == "success"){
+        sessionStorage.setItem("login", $("#login").val());
         alert(data.message);
-        window.location.replace(urlDominioFrontend + "/pages/html/chat/chat.html");
+        window.location.replace(urlDominioFrontend + "/pages/html/home/home.html");
     } else {
         alert("We didn't can found a account with the inserted informations, please review them");
     }

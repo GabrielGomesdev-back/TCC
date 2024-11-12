@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Inicial - Plataforma de Aprendizado</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css"></link>s
     <link rel="stylesheet" href="../../css/home/home.css"></link>
-    <script src="../../js/home/home.js"></script>
+    <script src="../../../assets/components/apiClient.js"></script>
     <script src="../../../assets/components/utils.js"></script>
+    <script src="../../js/home/home.js"></script>
 </head>
 <body>
     <!-- Menu de Navegação -->
@@ -44,20 +47,20 @@
         <section class="sidebar-left">
                 <div class="profile-container">
                     <div class="profile-info-content">
-                        <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic-content">
                         <div class="user-details">
-                            <h2 id="nomUser" class="user-name">Nome do Aluno</h2>
+                            <h2 id="nomUser" class="user-name"></h2>
                             <p id="emailUser" class="user-email">email@exemplo.com</p>
+                            <p id="languageLevel" class="user-email">email@exemplo.com</p>
                         </div>
                     </div>
-                    <div class="calendar-container">
+                    <!-- <div class="calendar-container">
                       <div class="calendar-header">
                           <h2>Calendário de Login</h2>
                       </div>
                       <div class="calendar-days">
-                          <!-- Dias do mês serão gerados dinamicamente pelo JavaScript -->
+                           Dias do mês serão gerados dinamicamente pelo JavaScript
                       </div>
-                  </div>
+                    </div> -->
                   
                 </div>
             
@@ -66,24 +69,18 @@
         <section class="center-content">
           <div class="main-content">
             <!-- Seção Central de Posts -->
-                <div class="post">
-                    <div class="post-header">
-                        <div class="post-user-info">
-                            <span class="post-date">2 horas atrás</span>
-                        </div>
-                    </div>
-                    <p class="post-text">Texto do post aqui. Essa seção pode conter o que o usuário desejar compartilhar.</p>
-                    <img src="post-imagem.jpg" alt="Imagem do Post" class="post-image">
+                <div id="feedbackDiv" class="feedback">
+
                 </div>
                 
                 <!-- Adicione mais posts conforme necessário -->
         </div>
         </section>
 
-        <section class="sidebar-right">
+        <!-- <section class="sidebar-right">
               <h3>Lista de Usuários</h3>
               <div class="user-list">
-                  <!-- Exemplo de Usuário -->
+                  Exemplo de Usuário
                   <div class="user">
                       <div class="user-info">
                           <span class="user-name">Nome do Usuário</span>
@@ -106,14 +103,18 @@
                         <span class="user-email">usuario@email.com</span>
                       </div>
                   </div>
-                  <!-- Adicione mais usuários conforme necessário -->
+                   Adicione mais usuários conforme necessário 
               </div>
-        </section>
+        </section> -->
     </main>
 
     <!-- Footer -->
     <footer>
         &copy; 2024 Plataforma de Idiomas. Todos os direitos reservados.
     </footer>
+    <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
+    <script src="../../../assets/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/libraries/footable/footable.all.custom.min.js"></script>
 </body>
 </html>
