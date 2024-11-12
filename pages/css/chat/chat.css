@@ -1,25 +1,123 @@
 html, body {
     margin: 0;
+    padding: 0;
     height: 100%;
     font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #C595FF;
+    padding: 10px 20px; /* Ajuste o padding lateral para evitar quebras */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+img{
+    width: 200px;
+}
+
+body {
+    padding-top: 6%; /* Compensa a altura fixa do header */
 }
 
 .chat-interface {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100%;
     background: white;
     border: 1px solid #ddd;
 }
 
-.chat-header {
-    background: #6a0dad;
-    color: white;
-    padding: 5px;
-    text-align: center;
-    font-size: 18px;
-    border-bottom: 1px solid #ddd;
-    height: 50px;
+.navbar {
+    display: flex;/* Distribui os itens no espaço disponível */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    max-width: 100%;
+    margin: 0 auto;
+    color: #301e66;
+}
+
+/* Menu Hamburguer */
+.menu-icon {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-right: 10px; /* Espaço entre o ícone do menu e o logo */
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    background-color: #301e66;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.menu-icon.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Menu Lateral */
+.nav-links {
+    position: fixed;
+    top: 60px; 
+    left: -250px;
+    height: calc(100vh - 60px);
+    width: 250px;
+    background-color: #C595FF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 30px;
+    transition: left 0.4s ease;
+    overflow-y: auto;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    color: #301e66;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.nav-links a img {
+    width: 20px;
+    height: 20px;
+}   
+
+.nav-links.active {
+    left: 0;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a foto e o nome */
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    color: #301e66;
 }
 
 .chat-box {
@@ -84,9 +182,4 @@ html, body {
 .message-time {
     font-size: 12px;
     color: #888;
-}
-
-.logo {
-    max-height: 80px;
-    max-width: 80px;
 }
