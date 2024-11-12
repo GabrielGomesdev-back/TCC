@@ -12,3 +12,4 @@ const urlDominioWebsocket = "ws://15.228.63.234:8084/";
 window.urlDominioBackend   = urlDominioBackend;
 window.urlDominioFrontend  = urlDominioFrontend;
 window.urlDominioWebsocket = urlDominioWebsocket;
+

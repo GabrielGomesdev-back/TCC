@@ -20,7 +20,7 @@ btnRestart.onclick = async () => {
     questions: correctQuestions 
   };
   await apiClient.post('api/v1/FT005/quiz/generate-feedback', mapJson);
-  window.location.replace(urlDominioFrontend + "/pages/html/home/home.html");
+  window.location.replace(urlDominioFrontend + "pages/html/home/home.html");
 };
 
 function nextQuestion(e) {

@@ -12,7 +12,7 @@ async function loginUser(){
     if(data.status == "success"){
         sessionStorage.setItem("login", $("#login").val());
         alert(data.message);
-        window.location.replace(urlDominioFrontend + "/pages/html/home/home.html");
+        window.location.replace(urlDominioFrontend + "pages/html/home/home.html");
     } else {
         alert("We didn't can found a account with the inserted informations, please review them");
     }

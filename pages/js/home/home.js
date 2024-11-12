@@ -36,3 +36,11 @@ function toggleMenu() {
 document.addEventListener("DOMContentLoaded", async () => {
     await fillScreen();
 });
+
+async function logout(){
+    let json = await apiClient.logout(sessionStorage.getItem('login'));
+    if(json.status == "success"){
+        sessionStorage.clear();
+        window.location.replace(urlDominioFrontend);
+    }
+}
