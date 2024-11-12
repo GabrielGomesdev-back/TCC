@@ -13,17 +13,55 @@
     <script src="../../../assets/components/utils.js"></script>
     <script src="../../js/chat/chat.js"></script>
 </head>
+<header>
+    <div class="navbar">
+      <div class="logo">
+        <a href="#"><img src="../../img/You Speakingl.png"
+            alt="Logo"></a>
+      </div>
+      
+      <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div class="profile-info">
+        <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic">
+        <span class="profile-name">Nome do Aluno</span>
+      </div>
+    </div>
+    
+    <nav class="nav-links" id="nav-links">
+      <a href="#"><img
+        src="../../img/12.png" alt="Notificações">  Notificações</a>
+      <a href="#"><img
+        src="../../img/13.png" alt="Chat">  Chat</a>          
+      <a href="#" id="language"><img
+        src="../../img/15.png" alt="Idioma">    Idioma</a>
+      <a href="#"><img
+        src="../../img/11.png" alt="Ajuda"> Ajuda</a>
+      <a href="#" id="logout"><img
+        src="../../img/14.png" alt="Logout">    Logout</a>
+    </nav>
+  </header>
 <body onload="javascript:connect()">
+    
     <div class="chat-interface">
-        <div class="chat-header">
-            <img src="../../../archives/you-speaking-logo.svg" class="logo">
-        </div>
+        <!-- <div class="chat-header">
+            <img src="../../img/You Speakingl.png" class="logo">
+        </div> -->
         <div class="chat-box" id="chatBox"></div>
         <div class="chat-input">
             <input type="text" id="messageInput" placeholder="Type a message...">
-            <button onclick="sendMessage()">Send</button>
+            <button id="sendMessage" onclick="sendMessage()">Send</button>
+            <audio id="audioPlayer" controls controlsList="nodownload nofullscreen noremoteplayback" style="display: none; width: 100%;"></audio>
+            <span id="recordingTime" style="display: none;">0:00</span>
+            <button id="sendAudioButton" onclick="sendAudio()" style="display: none;">Send</button>
+            <button id="recordButton" onclick="toggleRecording()">🎙️</button>
+            <button id="deleteAudioButton" onclick="deleteRecording()" style="display: none;">Excluir</button>
         </div>
-    </div>
+        
     <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
     <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
 </body>

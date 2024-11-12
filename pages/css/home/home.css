@@ -5,32 +5,31 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 /* Header */
 header {
     background-color: #C595FF;
     padding: 10px 20px; /* Ajuste o padding lateral para evitar quebras */
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 0;
     z-index: 10;
 }
 
 header img {
-    width: 30%;
+    width: 200px;
+}
+
+body {
+    flex-direction: column;
+    padding-top: 6%;
 }
 
 .navbar {
     display: flex;/* Distribui os itens no espaço disponível */
     align-items: center; /* Alinha os itens verticalmente no centro */
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     color: #301e66;
-    flex-wrap: nowrap;
 }
 
 /* Menu Hamburguer */
@@ -53,7 +52,7 @@ header img {
 }
 
 .menu-icon.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: rotate(45deg) translate(10px, 10px);
 }
 
 .menu-icon.active span:nth-child(2) {
@@ -69,7 +68,7 @@ header img {
     position: fixed;
     top: 60px; 
     left: -250px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 60px);
     width: 250px;
     background-color: #C595FF;
     display: flex;
