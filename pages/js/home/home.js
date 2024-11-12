@@ -1,3 +1,30 @@
+const apiClient = new ApiClient(urlDominioBackend);
+
+async function fillScreen (){
+    let json = await apiClient.get("api/v1/FT006/home/user-info?login="+sessionStorage.getItem('login'));
+    $("#nomUser").text("Nome: " + json?.data?.name);
+    $("#emailUser").text("Email: " + json?.data?.email);
+    $("#languageLevel").text("Nível: " + json?.data?.languageLevel);
+    await this.loadFeedbacks();
+}
+
+async function loadFeedbacks(){
+    let json = await apiClient.get("api/v1/FT006/home/analysis?login="+sessionStorage.getItem('login'));
+    const feedbackDiv = document.getElementById('feedbackDiv');
+    json.data.forEach( (_feedback) => {
+        const feedback = document.createElement("div");
+        feedback.innerHTML = `  <div class="container-feedback">
+                                    <div class="post-header">
+                                        <div class="post-user-info">
+                                            <span class="post-date">Nível: ${_feedback?.languageLevel} - 01/01/2003</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-text">${_feedback?.feedbackUser}<div>
+                                </div> `
+        feedbackDiv.appendChild(feedback);
+    })
+}
+
 function toggleMenu() {
     const navLinks = document.getElementById("nav-links");
     const menuIcon = document.getElementById("menu-icon");
@@ -6,37 +33,14 @@ function toggleMenu() {
     menuIcon.classList.toggle("active");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const calendarDays = document.querySelector(".calendar-days");
-
-    // Função para preencher o calendário
-    function renderCalendar() {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
-        // Cria todos os dias do mês atual
-        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayElement = document.createElement("div");
-            dayElement.classList.add("day");
-            dayElement.textContent = day;
-
-            // Verifica se o dia corresponde ao login e muda a cor
-            if (localStorage.getItem("loginDay") === `${currentYear}-${currentMonth + 1}-${day}`) {
-                dayElement.style.backgroundColor = "#C595FF"; // Marca o dia de login
-            }
-
-            calendarDays.appendChild(dayElement);
-        }
-    }
-
-    // Salva a data do login no localStorage (somente uma vez por sessão)
-    if (!localStorage.getItem("loginDay")) {
-        const today = new Date();
-        localStorage.setItem("loginDay", `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`);
-    }
-
-    // Chama a função para renderizar o calendário
-    renderCalendar();
+document.addEventListener("DOMContentLoaded", async () => {
+    await fillScreen();
 });
+
+async function logout(){
+    let json = await apiClient.logout(sessionStorage.getItem('login'));
+    if(json.status == "success"){
+        sessionStorage.clear();
+        window.location.replace(urlDominioFrontend);
+    }
+}

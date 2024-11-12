@@ -3,7 +3,7 @@ let stompClient;
 
 async function greetinsChat() {
     $.ajax({
-        url: urlDominioBackend + 'api/v1/FT004/classes/greetings?login=' + sessionStorage.getItem('login') + '&language=' + navigator.language,
+        url : urlDominioBackend + 'api/v1/FT004/classes/greetings?login='+ sessionStorage.getItem('login') + '&language=' + navigator.language,
         type: "GET",
         success: function (data) {
             const chatBox = document.getElementById('chatBox');
@@ -63,7 +63,7 @@ async function sendMessage() {
         chatBox.appendChild(messageDiv);
         messageInput.value = '';
         chatBox.scrollTop = chatBox.scrollHeight;
-        stompClient.send("/app/send", {}, JSON.stringify({ 'login': sessionStorage.getItem('login'), 'language': sessionStorage.getItem("language"), 'message': messageText, 'time': new Date().toLocaleTimeString() }));
+        stompClient.send("/app/send", {}, JSON.stringify({'login': sessionStorage.getItem('login'), 'language': sessionStorage.getItem("language"), 'message':messageText, 'time': new Date().toLocaleTimeString()}));
     }
 }
 
@@ -189,19 +189,6 @@ function sendAudio() {
 
     // Adiciona ao contêiner do chat
     document.getElementById('chatBox').appendChild(messageDiv);
-
-    // const chatBox = document.getElementById('chatBox');
-    // const messageDiv = document.createElement('div');
-    // messageDiv.classList.add('message', 'sent', 'audio-message');
-
-    // const audioElement = document.createElement('audio');
-    // audioElement.src = URL.createObjectURL(audioBlob);
-    // audioElement.controls = true;
-    // audioElement.controlsList = "nodownload nofullscreen";
-
-    // messageDiv.appendChild(audioElement);
-    // chatBox.appendChild(messageDiv);
-    // chatBox.scrollTop = chatBox.scrollHeight;
 
     // Esconde o player e o botão de envio de áudio
     document.getElementById('audioPlayer').style.display = 'none';
