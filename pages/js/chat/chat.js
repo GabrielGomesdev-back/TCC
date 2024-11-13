@@ -88,7 +88,7 @@ let seconds = 0;
 
 // Inicia ou para a gravação
 function toggleRecording() {
-    console.log("teste1")
+    console.log("teste1");
     if (!isRecording) {
         startRecording();
     } else {
@@ -101,7 +101,7 @@ async function startRecording() {
     console.log("teste");
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
-
+    console.log(mediaRecorder);
     mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
 
     mediaRecorder.onstop = () => {
