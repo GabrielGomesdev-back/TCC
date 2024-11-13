@@ -112,13 +112,21 @@ async function startRecording() {
     isRecording = true;
     startTimer();
 
-    document.getElementById('recordButton').innerText = 'Stop';
-    document.getElementById('sendMessage').style.display = 'none'; // Esconde o botão de envio de mensagem ao iniciar a gravação
-    document.getElementById('sendAudioButton').style.display = 'none';
-    document.getElementById('audioPlayer').style.display = 'block';
-    document.getElementById('messageInput').style.display = 'none';
-    document.getElementById('recordingTime').style.display = 'block';
-    document.getElementById('deleteAudioButton').style.display = 'none';
+    microm('#recordButton').text('Stop');
+    microm('#sendMessage').hide();
+    microm('#sendAudioButton').hide();
+    microm('#audioPlayer').show();
+    microm('#messageInput').hide();
+    microm('#recordingTime').show();
+    microm('#deleteAudioButton').hide();
+
+    // document.getElementById('recordButton').innerText = 'Stop';
+    // document.getElementById('sendMessage').style.display = 'none'; // Esconde o botão de envio de mensagem ao iniciar a gravação
+    // document.getElementById('sendAudioButton').style.display = 'none';
+    // document.getElementById('audioPlayer').style.display = 'block';
+    // document.getElementById('messageInput').style.display = 'none';
+    // document.getElementById('recordingTime').style.display = 'block';
+    // document.getElementById('deleteAudioButton').style.display = 'none';
 
 }
 
