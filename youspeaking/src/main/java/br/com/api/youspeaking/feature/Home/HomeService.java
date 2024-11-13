@@ -15,11 +15,13 @@ import br.com.api.youspeaking.data.entity.Feedback;
 import br.com.api.youspeaking.data.entity.User;
 import br.com.api.youspeaking.data.repository.FeedbackRepository;
 import br.com.api.youspeaking.data.repository.UserRepository;
+import br.com.api.youspeaking.feature.Quiz.QuizService;
 import br.com.api.youspeaking.utils.Utils;
 
 @Service
 public class HomeService {
 
+    @Autowired QuizService service;
     @Autowired FeedbackRepository repository;
     @Autowired UserRepository userRepository;
 
@@ -51,6 +53,7 @@ public class HomeService {
         ObjectNode response = Utils.genericJsonSuccess();
         try {
             this.updateLogout(login);
+            service.generateFeedbackClass(login);
             response.put("data", "Operação realizada com sucesso !");
             return response;
         } catch (Exception e) {

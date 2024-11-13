@@ -13,9 +13,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.com.api.youspeaking.data.entity.Feedback;
+import br.com.api.youspeaking.data.entity.LogMessage;
 import br.com.api.youspeaking.data.entity.QuizResult;
 import br.com.api.youspeaking.data.entity.User;
 import br.com.api.youspeaking.data.repository.FeedbackRepository;
+import br.com.api.youspeaking.data.repository.LogMessageRepository;
 import br.com.api.youspeaking.data.repository.QuizResultRepository;
 import br.com.api.youspeaking.data.repository.UserRepository;
 import br.com.api.youspeaking.feature.Thirdparties.OpenAI.OpenApiService;
@@ -26,6 +28,7 @@ import br.com.api.youspeaking.vo.MessageVO;
 @Service
 public class QuizService {
 
+    @Autowired LogMessageRepository logMessageRepository;
     @Autowired OpenApiService openAIservice;
     @Autowired QuizResultRepository quizResultRepository;
     @Autowired FeedbackRepository feedbackRepository;
@@ -42,9 +45,11 @@ public class QuizService {
         ChatRequestVO chatRequest = new ChatRequestVO();
         List<MessageVO> listaMensagens = new ArrayList();
 
+        User user = userRepository.findByLogin(login);
+
         String perguntas = "Retorne somente um json que contenha 5 perguntas de alternativas do básico ao avançado para medir o nível de ${idiomaAprendizado} de uma pessoa de língua matriz ${idiomaMae}";
         String prompt = " com retorno no formato JSON em camel case retornando somente o array de perguntas sem um objeto perguntas, indicando se a alternativa está certa ou errada no próprio objeto de alternativa sem indicar a letra da resposta, com o campo do enunciado da pergunta com o nome de texto, com os objetos de alternativas com o atributo resposta e correta como true ou false para indicar se a resposta é a certa";
-        perguntas = perguntas.replace("${idiomaAprendizado}", "EN");
+        perguntas = perguntas.replace("${idiomaAprendizado}", user.getLanguage());
         perguntas = perguntas.replace("${idiomaMae}", language);
 
         MessageVO vo = new MessageVO(perguntas + prompt, "user");
@@ -124,4 +129,45 @@ public class QuizService {
         feedbackRepository.save(feedback);
     }
 
+    public void generateFeedbackClass(String login) throws JsonProcessingException{
+        ObjectMapper mapper = new ObjectMapper();
+        ChatRequestVO chatRequest = new ChatRequestVO();
+        List<MessageVO> listaMensagens = new ArrayList();
+
+        User user = userRepository.findByLogin(login);
+
+        String prompt  = "Responda somente um json: avalie a evolução de uma pessoa que tem aulas do idioma ${idiomaAprendizado}";
+        String prompt2 = " com base nas mensagens gere um JSON em camelCase e retorne somente o json com os atributos de nivel indicando o nível de conhecimento do usuário com a primeira letra em maiúsculo e outro de feedback que vai explicar sobre o nível de idioma e dar algumas dicas de como melhorar a aprendizagem, retornar o campo feedback em html dentro de uma string ";
+        
+        prompt = prompt.replace("${idiomaAprendizado}", user.getLanguage());
+
+        ArrayList<LogMessage> messages = logMessageRepository.findAllByLoginOrderByDateMessageAsc(login);
+        
+        ArrayList<Feedback> listFeedback = feedbackRepository.findAllByLoginOrderByFeedbackDateAsc(login);
+        for(Feedback feedback : listFeedback){
+            MessageVO voAssistaint = new MessageVO(feedback.getFeedbackUser(), "assistant");
+            listaMensagens.add(voAssistaint);
+        }
+
+        for(LogMessage message : messages){
+            MessageVO voUser = new MessageVO(message.getMessage(), "user");
+            listaMensagens.add(voUser);
+            MessageVO voAssistaint = new MessageVO(message.getMessageResponse(), "assistant");
+            listaMensagens.add(voAssistaint);
+        }
+
+        MessageVO vo = new MessageVO(prompt + prompt2, "user");
+        listaMensagens.add(vo);
+        chatRequest.setMessages(listaMensagens);
+        chatRequest.setModel("gpt-4o-mini");
+        ObjectNode responseChat   = openAIservice.callOpenAI(chatRequest);
+
+        String responseChatString = responseChat.get("choices").get(0).get("message").get("content").asText();
+        JsonNode jsonNode = mapper.readTree(responseChatString.replaceAll("```|´´´", "").replace("json", ""));    
+
+        saveFeedback(login, jsonNode);
+
+        user.setLanguageLevel(jsonNode.get("nivel").asText());
+        userRepository.save(user);
+    }
 }
