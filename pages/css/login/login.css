@@ -45,17 +45,6 @@ input[type="button"]:hover {
     background-color: #0056b3;
 }
 
-.link {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.link a {
-    color: #007bff;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
 .links {
     text-align: center;
     margin-top: 10px;

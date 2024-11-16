@@ -1,7 +1,6 @@
 body {
     background-color: #C595FF;
-    margin: 0;
-    padding: 0;
+    margin: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +11,7 @@ body {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
+    padding: 20px;
     width: 300px;
 }
   

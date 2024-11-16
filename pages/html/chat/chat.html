@@ -1,69 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Interface</title>
-    <link rel="stylesheet" href="../../css/chat/chat.css">
-    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.css"></link>
-    <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css"></link>
-    <script src="../../../assets/libraries/stomp/stomp.js"></script>
-    <script src="../../../assets/libraries/stomp/stomp.min.js"></script>
-    <script src="../../../assets/components/utils.js"></script>
-    <script src="../../js/chat/chat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <link rel="stylesheet" href="../../css/chat/chat.css">
+  <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/png" href="../../img/You Speaking (3).png">
+  <script src="../../../assets/libraries/stomp/stomp.min.js"></script>
+  <script src="../../../assets/components/utils.js"></script>
+  <script src="../../js/chat/chat.js"></script>
 </head>
 <header>
-    <div class="navbar">
-      <div class="logo">
-        <a href="#"><img src="../../img/You Speakingl.png"
-            alt="Logo"></a>
-      </div>
-      
-      <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      
-      <div class="profile-info">
-        <img src="../../img/10.png" alt="Foto do Perfil" class="profile-pic">
-        <span id="loginUsuario" class="profile-name">Nome do Aluno</span>
-      </div>
+  <div class="navbar">
+    <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    
-    <nav class="nav-links" id="nav-links">
-      <!-- <a href="#"><img
-        src="../../img/12.png" alt="Notificações">  Notificações</a> -->
-      <a href="/pages/html/chat/chat.html"><img
-        src="../../img/13.png" alt="Chat"> You-bot </a>          
-      <a href="/pages/html/quiz/quiz.html" id="language"><img
-        src="../../img/15.png" alt="Trivia"> Trivia </a>
-      <!-- <a href="#"><img
-        src="../../img/11.png" alt="Ajuda"> Ajuda</a> -->
-      <a href="#" onclick="logout()" id="logout"><img
-        src="../../img/14.png" alt="Logout">    Logout</a>
-    </nav>
-  </header>
+    <div class="logo">
+      <a href="#"><img src="../../img/You Speakingl.png" alt="Logo"></a>
+    </div>
+  </div>
+
+  <nav class="nav-links" id="nav-links">
+    <a href="/pages/html/chat/chat.html"><img src="../../img/13.png" alt="Home"> Home </a>
+    <a href="/pages/html/quiz/quiz.html" id="language"><img src="../../img/15.png" alt="Trivia"> Trivia </a>
+    <a href="#" onclick="logout()" id="logout"><img src="../../img/14.png" alt="Logout"> Logout</a>
+  </nav>
+</header>
+
 <body onload="javascript:connect()">
-    
-    <div class="chat-interface">
-        <!-- <div class="chat-header">
-            <img src="../../img/You Speakingl.png" class="logo">
-        </div> -->
-        <div class="chat-box" id="chatBox"></div>
-        <div class="chat-input">
-            <input type="text" id="messageInput" placeholder="Type a message...">
-            <button id="sendMessage" onclick="sendMessage()">Send</button>
-            <audio id="audioPlayer" controls controlsList="nodownload nofullscreen noremoteplayback" style="display: none; width: 100%;"></audio>
-            <span id="recordingTime" style="display: none;">0:00</span>
-            <button id="sendAudioButton" onclick="sendAudio()" style="display: none;">Send</button>
-            <button id="recordButton" onclick="toggleRecording()">🎙️</button>
-            <button id="deleteAudioButton" onclick="deleteRecording()" style="display: none;">Excluir</button>
-        </div>
-        
-    <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
+  <div class="chat-interface">
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="messageInput" placeholder="Type a message...">
+      <button id="sendMessage" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+      <audio id="audioPlayer" controls controlsList="nodownload nofullscreen noremoteplayback"
+        style="display: none; width: 100%;"></audio>
+      <span id="recordingTime" style="display: none;">0:00</span>
+      <button id="sendAudioButton" onclick="sendAudio()" style="display: none;"><i class="fas fa-paper-plane"></i> </button>
+      <button id="recordButton" onclick="toggleRecording()"><i class="fas fa-microphone"></i></button>
+      <button id="deleteAudioButton" onclick="deleteRecording()" style="display: none;"><i class="fas fa-trash-alt"></i></button>
+    </div>
+
     <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
-    <script src="../../../node_modules/microm/microm.js"></script>
 </body>
+
 </html>

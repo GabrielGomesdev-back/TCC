@@ -86,9 +86,7 @@ let isRecording = false;
 let timerInterval;
 let seconds = 0;
 
-// Inicia ou para a gravação
 function toggleRecording() {
-    console.log("teste1");
     if (!isRecording) {
         startRecording();
     } else {
@@ -96,12 +94,10 @@ function toggleRecording() {
     }
 }
 
-// Inicia a gravação do áudio
 async function startRecording() {
-    console.log("teste");
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
-    console.log(mediaRecorder);
+
     mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
 
     mediaRecorder.onstop = () => {
@@ -114,21 +110,13 @@ async function startRecording() {
     isRecording = true;
     startTimer();
 
-    microm('#recordButton').text('Stop');
-    microm('#sendMessage').hide();
-    microm('#sendAudioButton').hide();
-    microm('#audioPlayer').show();
-    microm('#messageInput').hide();
-    microm('#recordingTime').show();
-    microm('#deleteAudioButton').hide();
-
-    // document.getElementById('recordButton').innerText = 'Stop';
-    // document.getElementById('sendMessage').style.display = 'none'; // Esconde o botão de envio de mensagem ao iniciar a gravação
-    // document.getElementById('sendAudioButton').style.display = 'none';
-    // document.getElementById('audioPlayer').style.display = 'block';
-    // document.getElementById('messageInput').style.display = 'none';
-    // document.getElementById('recordingTime').style.display = 'block';
-    // document.getElementById('deleteAudioButton').style.display = 'none';
+    document.getElementById('recordButton').innerHTML = '<i class="fas fa-stop"></i>';
+    document.getElementById('sendMessage').style.display = 'none';
+    document.getElementById('sendAudioButton').style.display = 'none';
+    document.getElementById('audioPlayer').style.display = 'block';
+    document.getElementById('messageInput').style.display = 'none';
+    document.getElementById('recordingTime').style.display = 'block';
+    document.getElementById('deleteAudioButton').style.display = 'none';
 
 }
 
@@ -138,12 +126,11 @@ function deleteRecording() {
     document.getElementById('messageInput').style.display = 'block';
     document.getElementById('sendAudioButton').style.display = 'none';
     document.getElementById('deleteAudioButton').style.display = 'none';
-    document.getElementById('recordButton').innerText = '🎙️';
+    document.getElementById('recordButton').innerHTML= '<i class="fas fa-microphone"></i>';
     document.getElementById('recordButton').style.display = 'inline';
-    ocument.getElementById('sendMessage').style.display = 'inline'; 
+    document.getElementById('sendMessage').style.display = 'inline'; 
 }
 
-// Para a gravação do áudio
 function stopRecording() {
     mediaRecorder.stop();
     isRecording = false;
@@ -161,7 +148,7 @@ function startTimer() {
         seconds++;
         updateTimerDisplay();
         if (seconds >= 180) {
-            stopRecording(); // Para automaticamente após 3 minutos
+            stopRecording();
         }
     }, 1000);
 }
@@ -177,7 +164,6 @@ function updateTimerDisplay() {
     document.getElementById('recordingTime').textContent = `${minutes}:${secs}`;
 }
 
-// Mostra os controles após a gravação
 function showAudioControls() {
     const audioUrl = URL.createObjectURL(audioBlob);
     const audioPlayer = document.getElementById('audioPlayer');
@@ -185,11 +171,9 @@ function showAudioControls() {
     audioPlayer.style.display = 'block';
 }
 
-// Envia o áudio e exibe no chat
 function sendAudio() {
     const audioUrl = URL.createObjectURL(audioBlob);
 
-    // Cria uma nova mensagem de áudio para o chat
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', 'sent', 'audio-message');
 
@@ -199,15 +183,15 @@ function sendAudio() {
     audioPlayer.src = audioUrl;
 
     messageDiv.appendChild(audioPlayer);
-
-    // Adiciona ao contêiner do chat
+    
     document.getElementById('chatBox').appendChild(messageDiv);
-
-    // Esconde o player e o botão de envio de áudio
     document.getElementById('audioPlayer').style.display = 'none';
     document.getElementById('sendAudioButton').style.display = 'none';
     document.getElementById('sendMessage').style.display = 'inline';
     document.getElementById('messageInput').style.display = 'inline';
+    document.getElementById('deleteAudioButton').style.display = 'none';
+    document.getElementById('recordButton').innerHTML = '<i class="fas fa-microphone"></i>';
+    document.getElementById('recordButton').style.display = 'inline';
 }
 
 function toggleMenu() {

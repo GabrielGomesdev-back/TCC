@@ -1,126 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial - Plataforma de Aprendizado</title>
-    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.css"></link>
-    <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css"></link>s
-    <link rel="stylesheet" href="../../css/home/home.css"></link>
-    <script src="../../../assets/components/apiClient.js"></script>
-    <script src="../../../assets/components/utils.js"></script>
-    <script src="../../js/home/home.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="../../../assets/libraries/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../assets/libraries/footable/footable.core.custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" type="image/png" href="../../img/You Speaking (3).png">
+  <link rel="stylesheet" href="../../css/home/home.css">
+  <script src="../../../assets/components/apiClient.js"></script>
+  <script src="../../../assets/components/utils.js"></script>
+  <script src="../../js/home/home.js"></script>
 </head>
+
 <body>
-    <!-- Menu de Navegação -->
-    <header>
-        <div class="navbar">
-          <div class="logo">
-            <a href="#"><img src="../../img/You Speakingl.png"
-                alt="Logo"></a>
-          </div>
-          
-          <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+  <header>
+    <div class="navbar">
+      <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="logo">
+        <a href="#"><img src="../../img/You Speakingl.png" alt="Logo"></a>
+      </div>
+    </div>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="/pages/html/chat/chat.html"><img src="../../img/13.png" alt="Chat"> Chat </a>
+      <a href="/pages/html/quiz/quiz.html" id="language"><img src="../../img/15.png" alt="Trivia"> Trivia </a>
+      <a href="#" onclick="logout()" id="logout"><img src="../../img/14.png" alt="Logout"> Logout</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="sidebar-left">
+        <h2 id="nomUser" class="user-name"></h2>
+        <p id="emailUser" class="user-email">email@exemplo.com</p>
+        <p id="languageLevel" class="user-email">email@exemplo.com</p>
+    </section>
+
+    <section class="center-content">
+      <div class="main-content">
+        <div id="feedbackDiv" class="feedback">
+
         </div>
-        
-        <nav class="nav-links" id="nav-links">
-          <!-- <a href="#"><img
-            src="../../img/12.png" alt="Notificações">  Notificações</a> -->
-          <a href="/pages/html/chat/chat.html"><img
-            src="../../img/13.png" alt="Chat"> You-bot </a>          
-          <a href="/pages/html/quiz/quiz.html" id="language"><img
-            src="../../img/15.png" alt="Trivia"> Trivia </a>
-          <!-- <a href="#"><img
-            src="../../img/11.png" alt="Ajuda"> Ajuda</a> -->
-          <a href="#" onclick="logout()" id="logout"><img
-            src="../../img/14.png" alt="Logout">    Logout</a>
-        </nav>
-      </header>      
+      </div>
+    </section>
+  </main>
 
-    <!-- Conteúdo Principal -->
-    <main class="main-content">
-        <section class="sidebar-left">
-                <div class="profile-container">
-                    <div class="profile-info-content">
-                        <div class="user-details">
-                            <h2 id="nomUser" class="user-name"></h2>
-                            <p id="emailUser" class="user-email">email@exemplo.com</p>
-                            <p id="languageLevel" class="user-email">email@exemplo.com</p>
-                        </div>
-                    </div>
-                    <div>
-                      <nav class="nav-links" id="nav-links">
-                        <a href="/pages/html/chat/chat.html"><img
-                          src="../../img/13.png" alt="Chat"> You-bot </a>          
-                      </nav>
-                    </div>
-                    <!-- <div class="calendar-container">
-                      <div class="calendar-header">
-                          <h2>Calendário de Login</h2>
-                      </div>
-                      <div class="calendar-days">
-                           Dias do mês serão gerados dinamicamente pelo JavaScript
-                      </div>
-                    </div> -->
-                  
-                </div>
-            
-        </section>
-        
-        <section class="center-content">
-          <div class="main-content">
-            <!-- Seção Central de Posts -->
-                <div id="feedbackDiv" class="feedback">
-
-                </div>
-                
-                <!-- Adicione mais posts conforme necessário -->
-        </div>
-        </section>
-
-        <!-- <section class="sidebar-right">
-              <h3>Lista de Usuários</h3>
-              <div class="user-list">
-                  Exemplo de Usuário
-                  <div class="user">
-                      <div class="user-info">
-                          <span class="user-name">Nome do Usuário</span>
-                          <span class="user-email">usuario@email.com</span>
-                      </div>
-                      <div class="user-info">
-                        <span class="user-name">Nome do Usuário</span>
-                        <span class="user-email">usuario@email.com</span>
-                      </div>
-                      <div class="user-info">
-                        <span class="user-name">Nome do Usuário</span>
-                        <span class="user-email">usuario@email.com</span>
-                      </div>
-                      <div class="user-info">
-                        <span class="user-name">Nome do Usuário</span>
-                        <span class="user-email">usuario@email.com</span>
-                      </div>
-                      <div class="user-info">
-                        <span class="user-name">Nome do Usuário</span>
-                        <span class="user-email">usuario@email.com</span>
-                      </div>
-                  </div>
-                   Adicione mais usuários conforme necessário 
-              </div>
-        </section> -->
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        &copy; 2024 Plataforma de Idiomas. Todos os direitos reservados.
-    </footer>
-    <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
-    <script src="../../../assets/libraries/jquery/jquery-3.6.0.js"></script>
-    <script src="../../../assets/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/libraries/footable/footable.all.custom.min.js"></script>
+  <footer>
+    &copy; 2024 Plataforma de Idiomas. Todos os direitos reservados.
+  </footer>
+  <script src="../../../assets/libraries/jquery/jquery-3.6.0.min.js"></script>
+  <script src="../../../assets/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/libraries/footable/footable.all.custom.min.js"></script>
 </body>
+
 </html>
