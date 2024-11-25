@@ -2,6 +2,7 @@ package br.com.api.youspeaking.feature.Home;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.com.api.youspeaking.data.entity.Feedback;
@@ -32,9 +34,22 @@ public class HomeService {
     }
 
     protected ArrayNode getAllAnalysis(String login){
-        ObjectMapper objectMapper = new ObjectMapper();
         ArrayList<Feedback> listFeedback = repository.findAllByLoginOrderByFeedbackDateAsc(login);
-        return objectMapper.valueToTree(listFeedback);
+        return formatFeedbacks(listFeedback);
+    }
+
+    protected ArrayNode formatFeedbacks(ArrayList<Feedback> feedbackList){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNodeFactory factory = JsonNodeFactory.instance;
+        ArrayNode arrayNode = factory.arrayNode();
+        for(Feedback object : feedbackList){
+            ObjectNode objectNode = factory.objectNode();
+            objectNode = mapper.valueToTree(object);
+            objectNode.put("feedbackDate", sdf.format(object.getFeedbackDate()));
+            arrayNode.add(objectNode);
+        }
+        return arrayNode;
     }
     
     public ObjectNode getUserInfo(String login) throws Exception {

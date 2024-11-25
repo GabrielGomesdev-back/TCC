@@ -94,14 +94,14 @@ public class QuizService {
         ChatRequestVO chatRequest = new ChatRequestVO();
         List<MessageVO> listaMensagens = new ArrayList();
 
-        QuizResult quiz = quizResultRepository.findByLoginUser(json.get("user").asText());
+        List<QuizResult> quiz = quizResultRepository.findByLoginUserOrderByDateResultAsc(json.get("user").asText());
         User user = userRepository.findByLogin(json.get("user").asText());
 
         String prompt  = "Responda somente um json: O Json contém 5 perguntas para medir o conhecimento de uma pessoa no idioma ${idiomaAprendizado} : ${jsonPerguntas}";
         String prompt2 = " um usuário acertou as perguntas correspondentes aos indices: ${perguntasCertas} | com base nos acertos gere um JSON em camelCase e retorne somente o json com os atributos de nivel indicando o nível de conhecimento do usuário com a primeira letra em maiúsculo e outro de feedback que vai explicar sobre o nível de idioma e dar algumas dicas de como melhorar a aprendizagem, retornar o campo feedback em html dentro de uma string ";
         
         prompt = prompt.replace("${idiomaAprendizado}", user.getLanguage());
-        prompt = prompt.replace("${jsonPerguntas}", quiz.getQuestionsGenerated());
+        prompt = prompt.replace("${jsonPerguntas}", quiz.get(0).getQuestionsGenerated());
 
         prompt2 = prompt2.replace("${perguntasCertas}", json.get("questions").asText());
 
