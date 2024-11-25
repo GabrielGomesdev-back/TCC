@@ -16,7 +16,7 @@ async function loadFeedbacks(){
         feedback.innerHTML = `  <div class="container-feedback">
                                     <div class="post-header">
                                         <div class="post-user-info">
-                                            <span class="post-date">Nível: ${_feedback?.languageLevel} - 01/01/2003</span>
+                                            <span class="post-date">Nível: ${_feedback?.languageLevel} - ${_feedback?.feedbackDate}</span>
                                         </div>
                                     </div>
                                     <div class="post-text">${_feedback?.feedbackUser}<div>
