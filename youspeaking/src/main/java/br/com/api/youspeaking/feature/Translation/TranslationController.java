@@ -15,6 +15,11 @@ public class TranslationController {
     
     @Autowired private TranslationService service;
 
+    @GetMapping(value = "/teste")
+    public String teste() throws JsonProcessingException {
+        return "OK";
+    }
+
     @GetMapping(value = "/translate-text")
     public ObjectNode translateText(@RequestParam String text, @RequestParam String target) throws JsonProcessingException {
         return service.translateText(text, target);
