@@ -1,6 +1,5 @@
 package br.com.api.youspeaking.config;
 import org.apache.catalina.connector.Connector;
-import org.apache.coyote.ajp.AbstractAjpProtocol;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
@@ -38,7 +37,7 @@ public class ServerSetup {
        connector.setAllowTrace(false);
        connector.setScheme("http");
        connector.setProperty("address", ajpAddress);
-       ((AbstractAjpProtocol) connector.getProtocolHandler()).setSecretRequired(false);
+       //((AbstractHttp11Protocol) connector.getProtocolHandler()).setSecretRequired(false);
        return connector;
     }
 
