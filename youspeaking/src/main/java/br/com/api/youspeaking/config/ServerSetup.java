@@ -18,7 +18,7 @@ public class ServerSetup {
 
     String ajpAddress = "0.0.0.0";
    
-    private static final String AJP_PROTOCOL = "HTTP";
+    private static final String AJP_PROTOCOL = "org.apache.coyote.http11.Http11NioProtocol";
 
     @Bean
     public WebServerFactoryCustomizer<AbstractServletWebServerFactory> servletContainer() { //TomcatServletWebServerFactory
